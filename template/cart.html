@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% block mainblock %}
+
+<!-- Cart Page Section Begin -->
+<div class="cart-page">
+    <div class="container">
+        <div class="cart-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="product-h">Product</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td class="product-col">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            <div class="p-title">
+                                <h5>{{ item.product.name }}</h5>
+                            </div>
+                        </td>
+                        <td class="price-col">₹{{ item.product.price }}</td>
+                        <td class="total">₹{{ item.total_price }}</td>
+                        <td>
+                            <a href="{% url 'remove_from_cart' item.id %}" class="product-close">x</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">Your cart is empty.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cart-btn">
+            <div class="row">
+                <div class="col-lg-6 text-left">
+                    <a href="{% url 'clear_cart' %}" class="site-btn clear-btn">Clear Cart</a>
+                    <a href="{% url 'shop' %}" class="site-btn update-btn">Continue Shopping</a>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <a href="{% url 'checkout' %}" class="checkout-btn" id="checkout">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            .checkout-btn {
+                display: inline-block;
+                padding: 12px 20px;
+                background-color: #d3d3d3; /* Grey background */
+                color: black; /* Black font color */
+                font-size: 16px;
+                font-weight: bold;
+                border: none;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background 0.3s ease;
+            }
+        
+            .checkout-btn:hover {
+                background-color: #b0b0b0; /* Darker grey on hover */
+            }
+        </style>
+        <script>
+            document.getElementById("checkout").onclick(function(){
+                alert("Your Order has been Placed successfull");
+            });
+        </script>
+        
+</div>
+<!-- Cart Page Section End -->
+
+{% endblock mainblock %}

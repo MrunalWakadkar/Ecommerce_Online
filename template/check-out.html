@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+{% block mainblock %}
+
+<section class="page-add">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="page-breadcrumb">
+                    <h2>Checkout<span>.</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Checkout Form -->
+<section class="cart-total-page spad">
+    <div class="container">
+        <form action="{% url 'checkout' %}" method="POST" class="checkout-form">
+            {% csrf_token %}
+
+            <!-- 🟢 Django Messages Display
+            {% if messages %}
+                <div class="alert-container">
+                    {% for message in messages %}
+                        <div class="alert {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %} -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Your Information</h3>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-2"><p class="in-name">Name*</p></div>
+                        <div class="col-lg-10"><input type="text" name="name" required></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-2"><p class="in-name">Email*</p></div>
+                        <div class="col-lg-10"><input type="text" name="email" required></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-2"><p class="in-name">Address*</p></div>
+                        <div class="col-lg-10"><input type="text" name="address" required></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-2"><p class="in-name">City*</p></div>
+                        <div class="col-lg-10"><input type="text" name="city" required></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-2"><p class="in-name">ZIP Code*</p></div>
+                        <div class="col-lg-10"><input type="text" name="zip" required></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-2"><p class="in-name">Phone*</p></div>
+                        <div class="col-lg-10"><input type="text" name="phone" required></div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-3">
+                    <div class="order-table">
+                        <h4>Your Order</h4>
+                        {% for item in cart_items %}
+                        <div class="cart-item">
+                            <span>Product</span>
+                            <p class="product-name">{{ item.product.name }}</p>
+                        </div>
+                        <div class="cart-item">
+                            <span>Price</span>
+                            <p>₹{{ item.product.price }}</p>
+                        </div>
+                        <div class="cart-item">
+                            <span>Quantity</span>
+                            <p>{{ item.quantity }}</p>
+                        </div>
+                        {% endfor %}
+                        <div class="cart-item">
+                            <span>Subtotal</span>
+                            <p>₹{{ subtotal }}</p>
+                        </div>
+                        <div class="cart-item">
+                            <span>Shipping</span>
+                            <p>₹{{ shipping_charge }}</p>
+                        </div>
+                        <div class="cart-total">
+                            <span>Total</span>
+                            <p>₹{{ grand_total }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="payment-method">
+                        <h3>Payment Method</h3>
+                        <select name="payment_method" required>
+                            <option value="">Select Payment Method</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="Credit/Debit Card">Credit / Debit Card</option>
+                            <option value="Cash on Delivery">Cash on Delivery</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ Submit Button -->
+            <div class="row">
+                <div class="col-lg-12 text-right">
+                    <button type="submit" class="checkout-btn">Place Your Order</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<style>
+    .checkout-btn {
+        display: inline-block;
+        padding: 12px 20px;
+        background-color: #d3d3d3;
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+        background-color: #b0b0b0;
+    }
+
+    .payment-method select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: white;
+    }
+</style>
+
+{% endblock mainblock %}

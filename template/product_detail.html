@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block mainblock %}
+    <section class="product-page">
+        <div class="container">
+            <div class="product-control">
+                <a href="#">Previous</a>
+                <a href="#">Next</a>
+            </div>
+            <div class="row">
+                <!-- Product Image Section -->
+                <div class="col-lg-6">
+                    <div class="product-slider owl-carousel">
+                        <div class="product-img">
+                            <figure>
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                {% if product.is_new %}
+                                    <div class="p-status">New</div>
+                                {% endif %}
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Details Section -->
+                <div class="col-lg-6">
+                    <div class="product-content">
+                        <h2>{{ product.name }}</h2>
+                        <div class="pc-meta">
+                            <h5>₹{{ product.price }}</h5>
+                            <div class="rating">
+                                {% for _ in product.get_rating %}
+                                    <i class="fa fa-star"></i>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Buttons: Add to Cart & Wishlist -->
+                        <div class="product-actions d-flex align-items-center">
+                            <!-- Add to Cart Button -->
+                            <form action="{% url 'add_to_cart' product.id %}" method="POST" class="mr-3">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <button type="submit" class="primary-btn pc-btn">Add to Cart</button>
+                            </form>
+
+                            
+                        </div>
+
+                        <!-- Product Description -->
+                        <p class="product-description mt-3">{{ product.description }}</p>
+
+                        <!-- Product Information Section -->
+                        <ul class="p-info mt-3">
+                            <li><strong>Category:</strong> {{ product.category.name }}</li>
+                            <li><strong>Tags:</strong> {{ product.tags }}</li>
+                            <li><strong>Product Info:</strong> {{ product.desc }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Styles -->
+    <style>
+        .wishlist-btn {
+            background-color: #ff6666;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .wishlist-btn:hover {
+            background-color: #ff3333;
+        }
+
+        .product-actions {
+            margin-top: 15px;
+        }
+    </style>
+
+{% endblock %}

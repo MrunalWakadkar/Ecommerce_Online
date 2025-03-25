@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="E-commerce Template">
+    <meta name="keywords" content="E-commerce, Shopping, Fashion, Store">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Violet</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloader -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Search Model -->
+	<div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form" action="{% url 'shop' %}" method="GET">
+                <input type="text" name="q" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+	<!-- Search Model End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="inner-header">
+                <div class="logo">
+                    <a href="#"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                </div>
+                <div class="header-right">
+                    <img src="{% static 'img/icons/search.png' %}" alt="" class="search-trigger">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'view_cart' %}">
+                        <img src="{% static 'img/icons/bag.png' %}" alt="">
+                        <span>2</span>
+                    </a>
+                    {% endif %}
+                </div>
+                
+                <!-- User Access Section -->
+                <div class="user-access">
+                    {% if user.is_authenticated %}
+                        
+
+                        <!-- Logout Button -->
+                        <a href="{% url 'logout' %}" class="btn btn-danger"
+                           style="padding: 4px 8px; font-weight: bold; border-radius: 8px; background-color: #bbb4b4; color:black; border: none;">
+                           <i class="fa fa-sign-out"></i> Logout</a>
+                    {% else %}
+                        <a href="{% url 'sign_up_page' %}">Sign Up /</a>
+                        <a href="{% url 'sign_in_page' %}">Sign In</a>
+                    {% endif %}
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav class="main-menu mobile-menu">
+                    <ul>
+                        <li><a href="{% url 'indexpage' %}">Home</a></li>
+                        <li><a href="{% url 'shop' %}">Shop</a></li>
+                        <li><a href="{% url 'contactpage' %}">Contact</a></li>
+                        <li><a href="{% url 'order_history' %}">Orders</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Info Begin -->
+    <div class="header-info">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="header-item">
+                        <img src="{% static 'img/icons/delivery.png' %}" alt="">
+                        <p>Free shipping on orders over ₹1000 in India</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-left text-lg-center">
+                    <div class="header-item">
+                        <img src="{% static 'img/icons/voucher.png' %}" alt="">
+                        <p>20% Student Discount</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-left text-xl-right">
+                    <div class="header-item">
+                    <img src="{% static 'img/icons/sales.png' %}" alt="">
+                    <p>30% off on dresses. Use code: 30OFF</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Info End -->
+    <!-- Header End -->
+
+    {% block mainblock %}
+    {% endblock %}
+   
+<!-- Footer Section Begin -->
+<footer class="footer-section spad">
+    <div class="container">
+        <div class="newslatter-form">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form action="#">
+                        <input type="text" placeholder="Your email address">
+                        <button type="submit">Subscribe to our newsletter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'js/mixitup.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

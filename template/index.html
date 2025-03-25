@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% block mainblock %}
+<!-- Hero Slider Begin -->
+<section class="hero-slider">
+    <div class="hero-items owl-carousel">
+        <div class="single-slider-item set-bg" data-setbg="{% static 'img/slider-1.jpg'%}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>2025</h1>
+                        <h2>Lookbook.</h2>
+                        <a href="#" class="primary-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slider-item set-bg" data-setbg="{% static 'img/slider-2.jpg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>2025</h1>
+                        <h2>Lookbook.</h2>
+                        <a href="{% url 'shop' %}" class="primary-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slider-item set-bg" data-setbg="{% static 'img/slider-3.jpg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>2025</h1>
+                        <h2>Lookbook.</h2>
+                        <a href="{% url 'shop' %}" class="primary-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Slider End -->
+    <!-- Features Section Begin -->
+    <section class="features-section spad">
+        <div class="features-ads">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="single-features-ads first">
+                            <img src="{% static 'img/icons/f-delivery.png' %}" alt="">
+                            <h4>Free shipping</h4>
+                            <p>Enjoy fast and free shipping on all orders. Get your favorite products delivered right to your doorstep without any extra cost!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-features-ads second">
+                            <img src="{% static 'img/icons/coin.png' %}" alt="">
+                            <h4>100% Money back </h4>
+                            <p>Shop with confidence! If you're not completely satisfied with your purchase, we offer a 100% money-back guarantee—no questions asked. </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-features-ads">
+                            <img src="{% static 'img/icons/chat.png' %}" alt="">
+                            <h4>Online support 24/7</h4>
+                            <p>Our support team is available 24/7 to assist you with any queries, concerns, or help you need. Contact us anytime, anywhere!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+    <!-- Lookbok Section Begin -->
+    <section class="lookbok-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-1">
+                    <div class="lookbok-left">
+                        <div class="section-title">
+                            <h2>2025 <br />#lookbook</h2>
+                        </div>
+                        <p>Step into the future of fashion with our exclusive 2025 Lookbook—a collection that blends bold trends, timeless elegance, and modern aesthetics. From statement pieces to everyday essentials, our latest lineup is designed to inspire confidence and creativity.
+
+                            ✨ Effortless Style – Elevate your wardrobe with chic, versatile pieces.
+                            🔥 Trend-Forward Designs – Embrace the latest cuts, colors, and textures.
+                            🌍 Sustainable Fashion – Crafted with eco-friendly materials for a better tomorrow.
+                            
+                            Get ready to redefine your style in 2025. Shop the look now! 🚀</p>
+                      
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="lookbok-pic">
+                        <img src="{% static 'img/lookbook_25.jpeg' %}" alt="">
+                        <div class="pic-text">fashion</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Lookbok Section End -->
+
+    <!-- Logo Section Begin -->
+    <div class="logo-section spad">
+        <div class="logo-items owl-carousel">
+            <div class="logo-item">
+                <img src="{% static 'img/logos/logo-1.png' %}" alt="">
+            </div>
+            <div class="logo-item">
+                <img src="{% static 'img/logos/logo-2.png' %}" alt="">
+            </div>
+            <div class="logo-item">
+                <img src="{% static 'img/logos/logo-3.png' %}" alt="">
+            </div>
+            <div class="logo-item">
+                <img src="{% static 'img/logos/logo-4.png' %}" alt="">
+            </div>
+            <div class="logo-item">
+                <img src="{% static 'img/logos/logo-5.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Logo Section End -->
+
+    {% endblock mainblock %}
