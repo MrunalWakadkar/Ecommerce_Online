@@ -2363,3 +2363,21 @@ ol {
 		padding: 10px 0;
 	}
 }
+
+
+
+
+
+
+.dropdown-menu {
+    min-width: 180px;
+}
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+.dropdown-menu a i {
+    margin-right: 8px;
+}

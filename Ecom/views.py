@@ -7,7 +7,8 @@ from .models import Products, Category, Cart, Order , CartItem , OrderItem
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 def home(request):
@@ -169,18 +170,7 @@ def checkout(request):
         # Clear cart after placing order
         cart_items.delete()
 
-        # 📧 Send confirmation email
-        subject = "Order Confirmation"
-        message = f"""Dear {name},Your order has been placed successfully! 🎉Order ID: {order.id} Total: ₹{grand_total} Payment Method: {payment_method} Thank you for shopping with us!"""
-        from_email = "wakadkarmrunal@gmail.com"
-        recipient_list = [email]
-
-        try:
-            send_mail(subject, message, from_email, recipient_list)
-        except Exception as e:
-            messages.warning(request, "Order placed, but email could not be sent.")
-
-        messages.success(request, "Your order has been placed successfully! A confirmation email has been sent.")
+        messages.success(request, "Your order has been placed successfully!")
         return redirect("order_history")  
 
     return render(request, "check-out.html", {
@@ -189,6 +179,7 @@ def checkout(request):
         "shipping_charge": shipping_charge,
         "grand_total": grand_total,
     })
+
 
 @login_required
 def view_cart(request):
@@ -260,5 +251,33 @@ def place_order(request):
 
     return redirect("checkout")
 
+@login_required
+def view_profile(request):
+    """Renders the user profile page."""
+    return render(request, "view_profile.html")
 
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        old_password = request.POST.get("old_password")
+        new_password1 = request.POST.get("new_password1")
+        new_password2 = request.POST.get("new_password2")
 
+        if not request.user.check_password(old_password):
+            messages.error(request, "Old password is incorrect.")
+            return redirect("change_password")
+
+        if new_password1 != new_password2:
+            messages.error(request, "New passwords do not match.")
+            return redirect("change_password")
+
+        request.user.set_password(new_password1)
+        request.user.save()
+
+        # Keep user logged in after password change
+        update_session_auth_hash(request, request.user)
+
+        messages.success(request, "Your password has been successfully changed.")
+        return redirect("view_profile")
+
+    return render(request, "change_password.html")

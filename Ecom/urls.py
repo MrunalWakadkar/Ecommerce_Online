@@ -28,6 +28,8 @@ urlpatterns = [
     path('order-history/', views.order_history, name='order_history'),
     path('place_order' , views.place_order , name="placeorder"),
 
+    path("profile/", views.view_profile, name="view_profile"),
+    path("change-password/", views.change_password, name="change_password"),
 
     
 ]
